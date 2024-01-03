@@ -39,7 +39,7 @@ public class StudentApiController {
 
     @PutMapping
     public ResponseEntity<?> replace(@RequestBody Student student){
-        if (listStudents.contains(student)){
+        if (listStudents.contains(student)){ // Because the hash and equality methods are set with ID, then whether an object is in the list of students or not is only possible with ID.
             int index = listStudents.indexOf(student); // get we index of this object
             listStudents.set(index,student);
             return new ResponseEntity<>(student,HttpStatus.OK);
@@ -49,7 +49,7 @@ public class StudentApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id){
+    public ResponseEntity<?> delete(@PathVariable("id") int id){ // contains method uses equals method in Student class
         Student student = new Student(id); // Because the hash and equality methods are set with ID, then whether an object is in the list of students or not is only possible with ID.
         if(listStudents.contains(student)){
             listStudents.remove(student);
